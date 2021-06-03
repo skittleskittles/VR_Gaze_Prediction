@@ -20,22 +20,43 @@ public class ShowLibrary : MonoBehaviour
           Vector2 viewPos = Camera.main.WorldToViewportPoint(worldPos);
           Vector3 dir = (worldPos - camTransform.position).normalized;
           float dot = Vector3.Dot(camTransform.forward, dir);//判断物体是否在相机前面
-  
           if (dot > 0 && viewPos.x >= 0 && viewPos.x <= 1 && viewPos.y >= 0 && viewPos.y <= 1)
               return true;
          else
              return false;
      }
 
-
-// Update is called once per frame
-void Update()
+    public bool PredInView(Vector3 worldPos, float y)
     {
-        Vector2 vec2 = Camera.main.WorldToScreenPoint(this.gameObject.transform.position);
-        if (IsInView(Pos)&&flag==false)
+        Transform camTransform = Camera.main.transform;
+        camTransform.localEulerAngles = new Vector3(camTransform.eulerAngles.x, y, camTransform.eulerAngles.z);
+        Vector2 viewPos = Camera.main.WorldToViewportPoint(worldPos);
+        Vector3 dir = (worldPos - camTransform.position).normalized;
+        float dot = Vector3.Dot(camTransform.forward, dir);//判断物体是否在相机前面
+
+        if (dot > 0 && viewPos.x >= 0 && viewPos.x <= 1 && viewPos.y >= 0 && viewPos.y <= 1)
+            return true;
+        else
+            return false;
+    }
+
+    public void check_lib(float y)
+    {
+        if (PredInView(Pos, y) && flag == false)
         {
             flag = true;
             MonoBehaviour.Instantiate(lib, Pos, Quaternion.Euler(0, 0, 0));
         }
+    }
+
+
+// Update is called once per frame
+void Update()
+    {
+        /*if (IsInView(Pos) && flag == false)
+        {
+            flag = true;
+            MonoBehaviour.Instantiate(lib, Pos, Quaternion.Euler(0, 0, 0));
+        }*/
     }
 }

@@ -60,10 +60,10 @@
     <Compile Include="Library\PackageCache\com.unity.timeline@1.4.7\Editor\inspectors\AnimationPlayableAssetInspector.cs" />
     <Compile Include="Library\PackageCache\com.unity.timeline@1.4.7\Editor\Actions\Menus\MenuItemActionBase.cs" />
     <Compile Include="Library\PackageCache\com.unity.timeline@1.4.7\Editor\Recording\TimelineRecording_Monobehaviour.cs" />
-    <Compile Include="Library\PackageCache\com.unity.timeline@1.4.7\Editor\Actions\TrackAction.cs" />
     <Compile Include="Library\PackageCache\com.unity.timeline@1.4.7\Editor\treeview\Drawers\TrackDrawer.cs" />
     <Compile Include="Library\PackageCache\com.unity.timeline@1.4.7\Editor\Utilities\Range.cs" />
     <Compile Include="Library\PackageCache\com.unity.timeline@1.4.7\Editor\treeview\Snapping\SnapEngine.cs" />
+    <Compile Include="Library\PackageCache\com.unity.timeline@1.4.7\Editor\Actions\TrackAction.cs" />
     <Compile Include="Library\PackageCache\com.unity.timeline@1.4.7\Editor\Window\ViewModel\ScriptableObjectViewPrefs.cs" />
     <Compile Include="Library\PackageCache\com.unity.timeline@1.4.7\Editor\Utilities\SequenceSelectorNameFormater.cs" />
     <Compile Include="Library\PackageCache\com.unity.timeline@1.4.7\Editor\Manipulators\Utils\EditModeReplaceUtils.cs" />

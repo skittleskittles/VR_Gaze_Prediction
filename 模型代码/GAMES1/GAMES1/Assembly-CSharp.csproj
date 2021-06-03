@@ -56,21 +56,23 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\UnityCallPython.cs" />
+    <Compile Include="Assets\Scripts\ShowThin3.cs" />
     <Compile Include="Assets\Scripts\ShowNumber.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\PlayerMove.cs" />
+    <Compile Include="Assets\Scripts\ShowRoad.cs" />
+    <Compile Include="Assets\Scripts\ShowThin2.cs" />
+    <Compile Include="Assets\Scripts\CameraAngle.cs" />
+    <Compile Include="Assets\Scripts\ShowBroad1.cs" />
     <Compile Include="Assets\Scripts\PrintNumber.cs" />
     <Compile Include="Assets\Scripts\CameraInfo.cs" />
     <Compile Include="Assets\Scripts\ShowLandmark.cs" />
-    <Compile Include="Assets\Scripts\CameraControllerWithKey.cs" />
-    <Compile Include="Assets\Scripts\ShowBroad1.cs" />
     <Compile Include="Assets\Scripts\ShowBroad2.cs" />
-    <Compile Include="Assets\Scripts\ShowLibrary.cs" />
-    <Compile Include="Assets\Scripts\CameraAngle.cs" />
-    <Compile Include="Assets\Scripts\ShowRoad.cs" />
     <Compile Include="Assets\Scripts\ShowThin1.cs" />
-    <Compile Include="Assets\Scripts\ShowThin2.cs" />
-    <Compile Include="Assets\Scripts\ShowThin3.cs" />
+    <Compile Include="Assets\Scripts\ShowLibrary.cs" />
+    <Compile Include="Assets\Scripts\CameraControllerWithKey.cs" />
+    <Compile Include="Assets\client.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
