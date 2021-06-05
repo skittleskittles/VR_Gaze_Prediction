@@ -6,7 +6,7 @@ public class ShowRoad : MonoBehaviour
 {
     GameObject Road;
     bool flag = false;
-    Vector3 Pos = new Vector3((float)38.1, (float)0.07, (float)51.1);
+    Vector3 Pos = new Vector3((float)43.5, (float)0.07, (float)46.8);
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +26,29 @@ public class ShowRoad : MonoBehaviour
             return false;
     }
 
+    public bool PredInView(Vector3 worldPos, Camera pre)
+    {
+        int i = 0;
+        Plane[] planes = GeometryUtility.CalculateFrustumPlanes(pre);
+        float offsetx = 20, offsetz = -20;
+        Vector3 tmpPos = new Vector3(worldPos.x + offsetx, worldPos.y, worldPos.z + offsetz);
+        for (i = 0; i < planes.Length; ++i)
+        {
+            if (!planes[i].GetSide(tmpPos)) break;
+        }
+        if (i == planes.Length) return true;
+        return false;
+    }
+
+
+    public void Check(Camera pre)
+    {
+        if (PredInView(Pos, pre) && flag == false)
+        {
+            flag = true;
+            MonoBehaviour.Instantiate(Road, Pos, Quaternion.Euler(0, (float)56.022, 0));
+        }
+    }
 
     // Update is called once per frame
     void Update()

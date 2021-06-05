@@ -9,7 +9,7 @@ from model import backNum,hidden
 
 
 #超参数
-backNum=5
+backNum=8
 
 
 if __name__ == '__main__':

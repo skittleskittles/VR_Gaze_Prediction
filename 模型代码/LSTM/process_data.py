@@ -6,7 +6,7 @@ from torch.utils import data
 
 
 #超参数
-backNum=5
+backNum=8
 
 
 

@@ -26,6 +26,28 @@ public class ShowThin2 : MonoBehaviour
             return false;
     }
 
+    public bool PredInView(Vector3 worldPos, Camera pre)
+    {
+        int i = 0;
+        Plane[] planes = GeometryUtility.CalculateFrustumPlanes(pre);
+        for (i = 0; i < planes.Length; ++i)
+        {
+            if (!planes[i].GetSide(worldPos)) break;
+        }
+        if (i == planes.Length) return true;
+        return false;
+    }
+
+
+    public void Check(Camera pre)
+    {
+        if (PredInView(Pos, pre) && flag == false)
+        {
+            flag = true;
+            MonoBehaviour.Instantiate(Tree, Pos, Quaternion.Euler(0, 0, 0));
+        }
+    }
+
 
 
     // Update is called once per frame

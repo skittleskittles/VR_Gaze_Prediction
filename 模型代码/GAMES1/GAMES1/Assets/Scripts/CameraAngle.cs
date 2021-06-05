@@ -26,7 +26,7 @@ public class CameraAngle : MonoBehaviour
         frameCount++;
         currentRotation = this.transform.rotation.eulerAngles;
         //每30帧写入一次csv文件
-        if (frameCount % 30 == 0)
+        if (frameCount % 10 == 0)
         {
             frameCount = 0;
             newLine =  currentRotation.x.ToString() + "," + currentRotation.y.ToString();

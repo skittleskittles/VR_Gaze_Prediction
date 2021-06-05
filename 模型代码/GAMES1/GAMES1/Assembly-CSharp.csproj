@@ -62,6 +62,7 @@
     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\PlayerMove.cs" />
     <Compile Include="Assets\Scripts\ShowRoad.cs" />
+    <Compile Include="Assets\client.cs" />
     <Compile Include="Assets\Scripts\ShowThin2.cs" />
     <Compile Include="Assets\Scripts\CameraAngle.cs" />
     <Compile Include="Assets\Scripts\ShowBroad1.cs" />
@@ -72,7 +73,7 @@
     <Compile Include="Assets\Scripts\ShowThin1.cs" />
     <Compile Include="Assets\Scripts\ShowLibrary.cs" />
     <Compile Include="Assets\Scripts\CameraControllerWithKey.cs" />
-    <Compile Include="Assets\client.cs" />
+    <Compile Include="Assets\DrawLine.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

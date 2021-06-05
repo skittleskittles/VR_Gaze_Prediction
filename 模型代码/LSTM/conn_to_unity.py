@@ -10,7 +10,6 @@ import sys
 
 
 def pred(a, b, c, d, e):
-    return(float(a))
     net = lstm(backNum, hidden)
     net.load_state_dict(torch.load('./weights/123.pth'))
     net.eval()
@@ -20,8 +19,7 @@ def pred(a, b, c, d, e):
     test=test.reshape(-1, 1, backNum)
     var_data = Variable(test)
     pred_test = net(var_data)
-    #return float(pred_test[0][0][0])
-    return(float(a))
+    return float(pred_test[0][0][0])
 
 
 

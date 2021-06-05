@@ -26,23 +26,22 @@ public class ShowLibrary : MonoBehaviour
              return false;
      }
 
-    public bool PredInView(Vector3 worldPos, float y)
+    public bool PredInView(Vector3 worldPos, Camera pre)
     {
-        Transform camTransform = Camera.main.transform;
-        camTransform.localEulerAngles = new Vector3(camTransform.eulerAngles.x, y, camTransform.eulerAngles.z);
-        Vector2 viewPos = Camera.main.WorldToViewportPoint(worldPos);
-        Vector3 dir = (worldPos - camTransform.position).normalized;
-        float dot = Vector3.Dot(camTransform.forward, dir);//判断物体是否在相机前面
-
-        if (dot > 0 && viewPos.x >= 0 && viewPos.x <= 1 && viewPos.y >= 0 && viewPos.y <= 1)
-            return true;
-        else
-            return false;
+        int i = 0;
+        Plane[] planes = GeometryUtility.CalculateFrustumPlanes(pre);
+        for (i = 0; i < planes.Length; ++i)
+        {
+            if (!planes[i].GetSide(worldPos)) break;
+        }
+        if (i == planes.Length) return true;
+        return false;
     }
 
-    public void check_lib(float y)
+
+    public void Check(Camera pre)
     {
-        if (PredInView(Pos, y) && flag == false)
+        if (PredInView(Pos, pre) && flag == false)
         {
             flag = true;
             MonoBehaviour.Instantiate(lib, Pos, Quaternion.Euler(0, 0, 0));
@@ -50,13 +49,13 @@ public class ShowLibrary : MonoBehaviour
     }
 
 
-// Update is called once per frame
-void Update()
+    // Update is called once per frame
+    void Update()
     {
-        /*if (IsInView(Pos) && flag == false)
+        if (IsInView(Pos) && flag == false)
         {
             flag = true;
             MonoBehaviour.Instantiate(lib, Pos, Quaternion.Euler(0, 0, 0));
-        }*/
+        }
     }
 }
