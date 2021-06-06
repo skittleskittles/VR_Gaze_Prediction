@@ -16,9 +16,19 @@ This is the final project for SJTU CS238.
 
 使用了简单的LSTM模型，使用前五帧作为输入，只考虑了y轴的旋转
 
-pinned：
 
-1 将x轴的旋转也考虑进网络
 
-2 将python的输出传递给unity
+## 2021/6/4：
+
+完成了unity和python的交互
+
+实现了线性预测版本的后端
+
+
+
+## 2021/6/6：
+
+实现了LSTM版本的后端，模型代码基本确定
+
+
 
