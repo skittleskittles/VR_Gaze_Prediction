@@ -18,7 +18,5 @@ This is the final project for SJTU CS238.
 
 pinned：
 
-1 将x轴的旋转也考虑进网络
-
-2 将python的输出传递给unity
+1 将线性预测改成LSTM
 
