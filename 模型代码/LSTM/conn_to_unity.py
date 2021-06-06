@@ -26,4 +26,5 @@ def pred(a, b, c, d, e):
 
 
 if __name__ == "__main__":
-    print(pred(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5]))
+    #print(pred(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5]))
+    print(360*pred(220.6489, 227.1894, 233.1601, 235.9535, 236.1955))

@@ -7,42 +7,42 @@ from torch.utils.data import DataLoader
 import torchvision.datasets as dsets
 import torchvision.transforms as transforms
 from model import lstm
-from process_data import pro_data
+from process_data import pro_data, pro_data_e
 from model import backNum,hidden
 from torch.utils.data import DataLoader
 import torch.utils.data as Data
 
 
 
-BATCH_SIZE = 64
-
 
 alldata = pro_data()
+alldata_e = pro_data_e()
+
+
 
 net = lstm(backNum, hidden)
+#net.load_state_dict(torch.load('./weights/123.pth'))
 criterion = nn.MSELoss()
 optimizer = torch.optim.Adam(net.parameters(), lr=1e-2)
-torch_dataset = Data.TensorDataset(alldata.train_x,alldata.train_y)
-loader = Data.DataLoader(dataset=torch_dataset,batch_size=BATCH_SIZE,shuffle=True,num_workers=2)
 
 for e in range(200):
     net.train()
-    for iteration, (batch_x, batch_y) in enumerate(loader):
-        # 前向传播
-        out = net(batch_x)
-        loss = criterion(out, batch_y)
-        optimizer.zero_grad()
-        loss.backward()
-        optimizer.step()
-        # 反向传播
-        optimizer.zero_grad()
-        loss.backward()
-        optimizer.step()
+    var_x = Variable(alldata.train_x)
+    var_y = Variable(alldata.train_y)
+    # 前向传播
+    out = net(var_x)
+    loss = criterion(out, var_y)
+    # 反向传播
+    optimizer.zero_grad()
+    loss.backward()
+    optimizer.step()
     if (e + 1) % 10 == 0: # 每 10 次输出结果
         net.eval()
         output=net(alldata.train_x)
-        loss = criterion(out, alldata.train_y)
+        loss = criterion(output, alldata.train_y)
         print(loss)
+net.eval()
+out=net(alldata.train_x)
 out = out.view(-1).data.numpy()
 var_y = alldata.train_y.view(-1).data.numpy()
 plt.plot(out, 'r', label='prediction')
@@ -50,3 +50,36 @@ plt.plot(var_y, 'b', label='real')
 plt.legend(loc='best')
 plt.show()
 torch.save(net.state_dict(), './weights/123.pth')
+
+
+
+#net.load_state_dict(torch.load('./weights/123e.pth'))
+
+for e in range(200):
+    net.train()
+    var_x = Variable(alldata_e.train_x)
+    var_y = Variable(alldata_e.train_y)
+    # 前向传播
+    out = net(var_x)
+    loss = criterion(out, var_y)
+    # 反向传播
+    optimizer.zero_grad()
+    loss.backward()
+    optimizer.step()
+    if (e + 1) % 10 == 0: # 每 10 次输出结果
+        net.eval()
+        output=net(alldata_e.train_x)
+        loss = criterion(output, alldata_e.train_y)
+        print(loss)
+net.eval()
+out=net(alldata_e.train_x)
+out = out.view(-1).data.numpy()
+var_y = alldata_e.train_y.view(-1).data.numpy()
+plt.plot(out, 'r', label='prediction')
+plt.plot(var_y, 'b', label='real')
+plt.legend(loc='best')
+plt.show()
+torch.save(net.state_dict(), './weights/123e.pth')
+
+
+

@@ -3,12 +3,12 @@ from torch.autograd import Variable
 
 
 #超参数
-backNum=8   #回看多少个
+backNum=5   #回看多少个
 hidden = 12
 
 
 class lstm(nn.Module):
-    def __init__(self, input_size, hidden_size, output_size=1, num_layers=4):
+    def __init__(self, input_size, hidden_size, output_size=1, num_layers=3):
         super(lstm, self).__init__()
         
         self.rnn = nn.LSTM(input_size, hidden_size, num_layers) # rnn

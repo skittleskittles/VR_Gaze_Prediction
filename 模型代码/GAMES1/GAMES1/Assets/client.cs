@@ -14,7 +14,9 @@ public class client : MonoBehaviour
     private Vector3 currentRotation;
     private int frameCount = 0;
     private int flag = 0;
-    private List<float> buffer = new List<float>(8);
+    private List<float> buffer = new List<float>(5);
+    private List<float> buffer_e = new List<float>(5);
+
 
     public ShowLibrary SL;
     public ShowBroad1 SB1;
@@ -39,30 +41,35 @@ public class client : MonoBehaviour
         EndPoint endPoint = new IPEndPoint(iPAddress, serverPort);
         tcpClient.Connect(endPoint);
         Debug.Log("请求服务器连接");
+        
     }
 
     void Update()
     {
         frameCount++;
-        if (frameCount != 30) return;
+        if (frameCount != 70) return;
         currentRotation = main.transform.rotation.eulerAngles;
         if (flag == 5)
         {
             frameCount = 0;
-            flag = 0;
-            buffer[0] = buffer[1];
-            buffer[1] = currentRotation.x;
-            for (int i = 2; i < 4; ++i)
+            for (int i = 0; i < 4; ++i)
             {
                 buffer[i] = buffer[i + 1];
+                buffer_e[i] = buffer_e[i + 1];
             }
             buffer[4] = currentRotation.y;
+            buffer_e[4] = currentRotation.x;
 
             //发送消息
             string smessage = "";
             for(int i = 0; i < 5; ++i)
             {
                 smessage += buffer[i].ToString();
+                smessage += " ";
+            }
+            for (int i = 0; i < 5; ++i)
+            {
+                smessage += buffer_e[i].ToString();
                 smessage += " ";
             }
             tcpClient.Send(Encoding.UTF8.GetBytes(smessage));
@@ -75,8 +82,8 @@ public class client : MonoBehaviour
             Debug.Log("客户端收到来自服务器发来的信息" + rmessage);
             //float cur_y = float.Parse(rmessage);
             string[] strArray = rmessage.Split(' ');
-            float cur_x = float.Parse(strArray[0]);
-            float cur_y = float.Parse(strArray[1]);
+            float cur_x = float.Parse(strArray[1]);
+            float cur_y = float.Parse(strArray[0]);
 
 
             pre.transform.eulerAngles = new Vector3(cur_x, cur_y, pre.transform.eulerAngles.z);
@@ -88,15 +95,16 @@ public class client : MonoBehaviour
             ST1.Check(pre);
             ST2.Check(pre);
             ST3.Check(pre);
+            return;
         }
         if (flag < 5)
         {
             frameCount = 0;
             buffer.Add(currentRotation.y);
+            buffer_e.Add(currentRotation.x);
+            //buffer[flag] = currentRotation.y;
             ++flag;
-
-            buffer[0] = 0;
-            buffer[1] = 0;
+            return;
         }
     }
 }

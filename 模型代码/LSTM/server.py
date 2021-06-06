@@ -16,7 +16,10 @@ def main():
     net = lstm(backNum, hidden)
     net.load_state_dict(torch.load('./weights/123.pth'))
     net.eval()
-    total = np.zeros(8)
+
+    nete = lstm(backNum, hidden)
+    nete.load_state_dict(torch.load('./weights/123e.pth'))
+    nete.eval()
     
     # 1.创建套接字socket
     tcp_socket = socket(AF_INET, SOCK_STREAM)
@@ -24,6 +27,11 @@ def main():
     tcp_socket.bind(("127.0.0.1", 5000))
     # 3.设置为监听状态listen
     tcp_socket.listen(128)
+
+    mydb = np.array([[0,0,0,0,0]])
+    mydb = mydb.astype('float32')
+    mydbe = np.array([[0,0,0,0,0]])
+    mydbe = mydbe.astype('float32')
 
     # 循环多次accept,为多个客户端服务
     while True:
@@ -42,28 +50,48 @@ def main():
             input = ndata.split()
             nums=[float(num) for num in input]
             input = np.array(nums)
+            print(input)
             input = input.astype('float32')
-            output1 = input[1]+(input[1]-input[0])
-            output2 = input[4]+(input[4]-input[3])*2
-            output = str(output1)+" "+str(output2)
+            for i in range(input.size):
+                input[i]=input[i]/360
+            input=input.reshape(1,-1)
+
 
 
             # np.append(total,input)
-            # tmp_total = torch.from_numpy(total)
-            # tmp_total=tmp_total.reshape(-1, 1, backNum)
-            # var_data = Variable(tmp_total)
-            # var_data= torch.tensor(var_data, dtype=torch.float32)
-            # pred_test = net(var_data)
-            # num = float(pred_test[0][0][0])
-            # num = num*360
-            # num = round(num,4)
-            # output = str(num)
+            tmp = input[0][0:5]
+            tmp = tmp.reshape(1,-1)
+            mydb = np.r_[mydb,tmp]
+            tmp_mydb = torch.from_numpy(mydb)
+            tmp_mydb=tmp_mydb.reshape(-1, 1, backNum)
+            var_data = Variable(tmp_mydb)
+            var_data= torch.tensor(var_data, dtype=torch.float32)
+            pred_test = net(var_data)
+            num = float(pred_test[mydb.shape[0]-1][0][0])
+            num = num*360
+            num = round(num,4)
+            output1 = str(num)
+
+            tmp = input[0][5:10]
+            tmp = tmp.reshape(1,-1)
+            mydbe = np.r_[mydbe,tmp]
+            tmp_mydb = torch.from_numpy(mydbe)
+            tmp_mydb=tmp_mydb.reshape(-1, 1, backNum)
+            var_data = Variable(tmp_mydb)
+            var_data= torch.tensor(var_data, dtype=torch.float32)
+            pred_test = nete(var_data)
+            num = float(pred_test[mydbe.shape[0]-1][0][0])
+            num = num*360
+            num = round(num,4)
+            output2 = str(num)
 
             # recv解堵塞两种方式：1.客户端发来数据  2.客户端调用close
             if new_data:
                 # 打印客户端发送到来的信息
-                print("message:%s" % new_data.decode("gbk"))
+                #print("message:%s" % new_data.decode("gbk"))
                 # 反馈客户端信息接收到
+                output = output1 + " " + output2
+                print(output)
                 new_client.send(str.encode(output))
             else: 
                 break
