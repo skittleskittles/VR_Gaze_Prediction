@@ -52,6 +52,11 @@ def main():
             input = np.array(nums)
             print(input)
             input = input.astype('float32')
+            for i in range(5):
+                if input[i+5]<=90:
+                    input[i+5]+=90
+                else:
+                    input[i+5]-=270
             for i in range(input.size):
                 input[i]=input[i]/360
             input=input.reshape(1,-1)
@@ -82,6 +87,10 @@ def main():
             pred_test = nete(var_data)
             num = float(pred_test[mydbe.shape[0]-1][0][0])
             num = num*360
+            if num<=90:
+                num+=270
+            else:
+                num-=90
             num = round(num,4)
             output2 = str(num)
 

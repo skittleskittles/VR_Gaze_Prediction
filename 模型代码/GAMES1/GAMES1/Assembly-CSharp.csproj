@@ -69,11 +69,12 @@
     <Compile Include="Assets\Scripts\PrintNumber.cs" />
     <Compile Include="Assets\Scripts\CameraInfo.cs" />
     <Compile Include="Assets\Scripts\ShowLandmark.cs" />
+    <Compile Include="Assets\DrawLine.cs" />
     <Compile Include="Assets\Scripts\ShowBroad2.cs" />
     <Compile Include="Assets\Scripts\ShowThin1.cs" />
     <Compile Include="Assets\Scripts\ShowLibrary.cs" />
     <Compile Include="Assets\Scripts\CameraControllerWithKey.cs" />
-    <Compile Include="Assets\DrawLine.cs" />
+    <Compile Include="Assets\ScreenPixel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

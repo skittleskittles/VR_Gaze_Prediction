@@ -68,6 +68,11 @@ class pro_data_e():
         data_csv = df.dropna()
         dataset = data_csv.values
         dataset = dataset.astype('float32')
+        for i in range(dataset.size):
+            if dataset[i]<=90:
+                dataset[i]+=90
+            else:
+                dataset[i]-=270
         scalar = 360
         self.dataset = list(map(lambda x: x / scalar, dataset))
         data_X, data_Y = self.create_dataset()
