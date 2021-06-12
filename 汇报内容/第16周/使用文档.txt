@@ -7,3 +7,6 @@
 3 进入unity_exe文件夹，点击18-ViewPredict.exe，启动Unity项目，等待画面加载以及前后端通信建立。
 
 使用wasd键转动摄像头，改变视角。
+
+
+注：只能在windows平台下使用
